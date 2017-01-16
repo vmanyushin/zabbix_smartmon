@@ -30,10 +30,6 @@ do
     SMART_DEVICE_SHORT_NAME=$(echo $SMART_DEVICE_NAME | cut -d " " -f 1)
     IFS=$OLD_IFS
 
-    if [[ $SMART_DEVICE_NAME =~ "/dev/sd" ]]; then
-        SMART_DEVICE_NAME=$(echo ${SMART_DEVICE_NAME} | sed -r 's/ -d scsi//')
-    fi
-
     for info in $(eval $SMARTCTL -i $SMART_DEVICE_NAME)
     do
 	[[ $info =~ "SMART support is: Available" ]] && SMART_AVAILABLE=true
